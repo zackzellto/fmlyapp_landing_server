@@ -17,7 +17,7 @@ def index():
     return app.send_static_file("index.html")
 
 
-database_url = os.environ.get('DATABASE_URL')
+database_url = os.environ.get('DB_URL')
 client = MongoClient(database_url)
 fmly_waitlist_db = client.get_database('Fmly_Waitlist_DB')
 waitlist_collection = fmly_waitlist_db.get_collection('collections')
