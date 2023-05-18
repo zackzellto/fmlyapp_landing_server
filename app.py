@@ -4,17 +4,11 @@ from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
 from bson import ObjectId
-
-
 load_dotenv()
 
+
 app = Flask(__name__, static_folder="/client/dist/", static_url_path="/")
-CORS(app, resources={r"/api/*": {"origins": "*"}})
-
-
-@app.route("/")
-def index():
-    return render_template("index.html")
+CORS(app)
 
 
 database_url = os.environ.get('DATABASE_URL')
@@ -23,6 +17,11 @@ fmly_waitlist_db = client.get_database('Fmly_Waitlist_DB')
 waitlist_collection = fmly_waitlist_db.get_collection('collections')
 
 print("Connected to the database")  # Logging statement
+
+
+@app.route("/")
+def index():
+    return app.send_static_file("index.html")
 
 
 @app.route('/api/waitlist', methods=['GET', 'POST'])
