@@ -64,5 +64,5 @@ def waitlist_item_route(id):
         return jsonify({"success": True})
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
