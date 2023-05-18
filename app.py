@@ -5,10 +5,17 @@ import os
 from pymongo import MongoClient
 from bson import ObjectId
 
-app = Flask(__name__)
-CORS(app, origins='*', allow_headers='*', methods='*')
 
 load_dotenv()
+
+app = Flask(__name__, static_folder="/client/dist", static_url_path="/")
+CORS(app)
+
+
+@app.route("/")
+def index():
+    return app.send_static_file("index.html")
+
 
 database_url = os.environ.get('DATABASE_URL')
 client = MongoClient(database_url)
@@ -55,11 +62,6 @@ def waitlist_item_route(id):
     elif request.method == 'DELETE':
         waitlist_collection.delete_one({'_id': ObjectId(id)})
         return jsonify({"success": True})
-
-
-@app.route('/')
-def index():
-    return 'Hello, World!'
 
 
 if __name__ == '__main__':
