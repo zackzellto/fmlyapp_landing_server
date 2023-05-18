@@ -17,7 +17,7 @@ def index():
     return app.send_static_file("index.html")
 
 
-database_url = os.environ.get('DB_URL')
+database_url = os.environ.get('DATABASE_URL')
 client = MongoClient(database_url)
 fmly_waitlist_db = client.get_database('Fmly_Waitlist_DB')
 waitlist_collection = fmly_waitlist_db.get_collection('collections')
@@ -64,6 +64,5 @@ def waitlist_item_route(id):
         return jsonify({"success": True})
 
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
-#     print("Flask app is running on port 5000")  # Logging statement
+if __name__ == '__main__':
+    app.run(debug=True)
