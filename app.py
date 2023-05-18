@@ -8,7 +8,10 @@ from bson import ObjectId
 
 load_dotenv()
 
-app = Flask(__name__, static_folder="../client/dist", static_url_path="/")
+base_dir = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__, static_folder=os.path.join(
+    base_dir, 'client', 'dist'), static_url_path="/")
+
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
