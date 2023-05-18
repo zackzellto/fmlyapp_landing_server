@@ -8,7 +8,7 @@ from bson import ObjectId
 
 load_dotenv()
 
-app = Flask(__name__, static_folder="/client/dist", static_url_path="/")
+app = Flask(__name__, static_folder="../client/dist", static_url_path="/")
 CORS(app)
 
 
