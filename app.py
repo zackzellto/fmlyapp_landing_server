@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 import os
@@ -14,7 +14,7 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 @app.route("/")
 def index():
-    return app.send_static_file("index.html")
+    return render_template("index.html")
 
 
 database_url = os.environ.get('DATABASE_URL')
